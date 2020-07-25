@@ -1,0 +1,15 @@
+{
+  "name": "microservices-nodejs-example",
+  "version": "1.0.0",
+  "description": "Example on multiple microservices built in node.js",
+  "main": "index.js",
+  "scripts": {
+    "launch-dev": "concurrently \"nodemon catalog/server\" \"nodemon image-bucket/server\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
