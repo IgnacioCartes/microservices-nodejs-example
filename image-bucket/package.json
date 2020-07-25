@@ -10,6 +10,7 @@
   "keywords": [],
   "description": "",
   "dependencies": {
-    "http-server": "^0.12.3"
+    "dotenv": "^8.2.0",
+    "static-server": "^2.2.1"
   }
 }
