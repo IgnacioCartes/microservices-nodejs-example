@@ -4,7 +4,7 @@
   "description": "Example on multiple microservices built in node.js",
   "main": "index.js",
   "scripts": {
-    "launch-dev": "concurrently \"cd catalog && nodemon server\" \"cd image-bucket && nodemon server\""
+    "launch-dev": "concurrently \"cd catalog && nodemon server\" \"cd image-bucket && nodemon server\" \"cd storefront/src && vue serve\""
   },
   "author": "",
   "license": "ISC",

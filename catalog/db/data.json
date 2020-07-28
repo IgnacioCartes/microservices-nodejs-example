@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Product 1",
       "description": "Basic product",
-      "image": "",
+      "image": "giftbox1.jpg",
       "price": 0.99,
       "currency": "USD",
       "available": true
@@ -13,7 +13,7 @@
       "id": 2,
       "name": "Product 2",
       "description": "Advanced product",
-      "image": "",
+      "image": "giftbox2.jpg",
       "price": 4.99,
       "currency": "USD",
       "available": true
@@ -22,7 +22,7 @@
       "id": 3,
       "name": "Product 3",
       "description": "Supreme product",
-      "image": "",
+      "image": "giftbox3.jpg",
       "price": 9.99,
       "currency": "USD",
       "available": true
