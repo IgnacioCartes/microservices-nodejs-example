@@ -5,4 +5,4 @@
 - Checkout
 - Payment
 - Image bucket
-- Webserver
+- Storefront (web server)
