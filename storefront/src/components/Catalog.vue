@@ -37,6 +37,7 @@ export default {
             });
 
             window.localStorage.setItem('ms-njs-cart', JSON.stringify(storage));
+            alert(`${itemToAdd.name} added to cart!`);
         }
     }
 }
