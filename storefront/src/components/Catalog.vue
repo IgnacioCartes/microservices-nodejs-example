@@ -5,14 +5,17 @@
             <h2>{{ product.name }}</h2>
             <img class="product-image" v-bind:src="'http://localhost:3040/' + product.image"/>
             <h3>Price: {{ product.price }} {{ product.currency }}</h3>
-            <button class="add-to-cart" v-on:click="addToCart(product)">Add to cart</button>
+            <button class="add-to-cart" v-on:click="addItemToCart(product)">Add to cart</button>
         </div>
     </div>
 </template>
 
 <script>
+import cartMixin from '../mixins/cartMixin';
+
 export default {
     name: 'Catalog',
+    mixins: [ cartMixin ],
     data: function() {
         return {
             catalog: []
@@ -22,23 +25,6 @@ export default {
         fetch('http://localhost:3030/catalog/')
             .then(res => res.json())
             .then(catalog => this.catalog = catalog);
-    },
-    methods: {
-        addToCart: function(itemToAdd) {
-            // Keeping things simple, localStorage JSON cart
-            const storage = JSON.parse(window.localStorage.getItem('ms-njs-cart')) || { cart: [] };
-
-            const existingItem = storage.cart.find(item => item.id === itemToAdd.id);
-            if (existingItem) existingItem.quantity++;
-            else storage.cart.push({
-                id: itemToAdd.id,
-                item: itemToAdd,
-                quantity: 1
-            });
-
-            window.localStorage.setItem('ms-njs-cart', JSON.stringify(storage));
-            alert(`${itemToAdd.name} added to cart!`);
-        }
     }
 }
 </script>

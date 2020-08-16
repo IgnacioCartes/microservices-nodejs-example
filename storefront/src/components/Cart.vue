@@ -8,36 +8,20 @@
             <h4>Price: {{ item.item.price * item.quantity }} {{ item.item.currency }}</h4>
             <button class="remove-from-cart" v-on:click="removeFromCart(item)">Remove from cart</button>
         </div>
-        <h3>Total: ${{ totalPrice }}</h3>
+        <h3>Total: ${{ totalCartPrice }}</h3>
+        <button class="add-to-cart" v-on:click="addToCart(product)">Add to cart</button>
     </div>
 </template>
 
 <script>
+import cartMixin from '../mixins/cartMixin';
+
 export default {
     name: 'Cart',
-    data: function() {
-        return {
-            cart: []
-        };
-    },
-    created: function () {
-        const storage = JSON.parse(window.localStorage.getItem('ms-njs-cart')) || { cart: [] };
-        this.cart = storage.cart;
-    },
-    methods: {
-        removeFromCart: function(itemToRemove) {
-            const existingItemIndex = this.cart.findIndex(item => item.id === itemToRemove.id);
-            this.cart.splice(existingItemIndex, 1);
-
-            window.localStorage.setItem('ms-njs-cart', JSON.stringify({ cart: this.cart }));
-            alert(`${itemToRemove.item.name} removed from cart!`);
-        }
-    },
-    computed: {
-        totalPrice: function() {
-            return this.cart.reduce((previous, current) => previous + (current.item.price * current.quantity), 0);
-        }
-    }
+    mixins: [ cartMixin ],
+    created: function () {},
+    methods: {},
+    computed: {}
 }
 </script>
 

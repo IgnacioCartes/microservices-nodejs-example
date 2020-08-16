@@ -1,8 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import AsyncComputed from 'vue-async-computed';
+
 import CatalogView from '../views/Catalog.vue'
 
 Vue.use(VueRouter);
+Vue.use(AsyncComputed);
 
 const routes = [
   {
