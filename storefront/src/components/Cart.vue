@@ -10,7 +10,7 @@
         </div>
         <h3>Total: ${{ totalCartPrice }}</h3>
         <button v-if="cart.length > 0 && !payComponentOpen" class="pay" v-on:click="openPaymentComponent()"><b>$</b> Pay</button>
-        <payment v-if="payComponentOpen" v-bind:cart="cart" v-bind:amount="totalCartPrice"></payment>
+        <payment v-if="payComponentOpen" v-bind:amount="totalCartPrice"></payment>
         <button v-if="payComponentOpen" class="cancel" v-on:click="closePaymentComponent()">Cancel payment</button>
     </div>
 </template>

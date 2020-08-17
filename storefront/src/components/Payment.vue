@@ -4,35 +4,49 @@
         <p>Please enter your Fictional &trade; Credit Card Number</p>
         <p><small>It must contain exactly twelve numbers and end in 0 to be "valid"</small></p>
         <input type="text" v-model="creditCardNumber" placeholder="000000000000"/>
-        <button :disabled="!creditCardNumber" class="pay" v-on:click="confirmPayment(cart, amount, creditCardNumber)">Confirm payment</button>
+        <button :disabled="!creditCardNumber || processingPayment" class="pay" v-on:click="confirmPayment(cart, amount, creditCardNumber)">Confirm payment</button>
+        <p v-show="errorMessage" class="error">{{errorMessage}}</p>
         <hr/>
     </div>
 </template>
 
 <script>
+import cartMixin from '../mixins/cartMixin';
 import hostsMixin from '../mixins/hostsMixin';
 
 export default {
     name: 'Payment',
-    mixins: [ hostsMixin ],
+    mixins: [ cartMixin, hostsMixin ],
     data: function() {
         return {
-            creditCardNumber: ''
+            creditCardNumber: '',
+            processingPayment: false,
+            errorMessage: ''
         };
     },
     props: {
-        cart: Array,
         amount: Number
     },
     methods: {
         confirmPayment: function(cart, amount, creditCardNumber) {
-            const postBody = { cart, amount, creditCardNumber };
+            const body = JSON.stringify({ cart, amount, creditCardNumber });
+            this.processingPayment = true;
+            this.errorMessage = '';
 
-            fetch(this.getHost('PAYMENT') + '/payment/', { method: 'POST' })
+            fetch(this.getHost('PAYMENT') + '/payment/', { method: 'POST', body, headers:{ 'Content-Type': 'application/json' }})
                 .then(res => res.json())
                 .then(response => {
-                    console.log('paymentResponse', response);
-                });
+                    if (response.status === 'success') {
+                        // do redirect
+                        alert('Order succesfully placed!');
+                        this.clearCart();
+                        this.$router.replace({ path: '/' });
+                    } else {
+                        // log error
+                        this.errorMessage = response.message;
+                    }
+                })
+                .finally(() => this.processingPayment = false);
         }
     }
 }
@@ -53,4 +67,10 @@ button.pay {
 button.pay:disabled {
     opacity: 0.5;
 }
+
+p.error {
+    font-weight: bold;
+    color: #df2020;
+}
+
 </style>

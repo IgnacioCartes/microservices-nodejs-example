@@ -36,6 +36,10 @@ const cartMixin = {
             this.cart.splice(existingItemIndex, 1);
             this.writeCart(this.cart);
             alert(`${itemToRemove.item.name} removed from cart!`);
+        },
+        clearCart: function() {
+            this.cart = [];
+            this.writeCart(this.cart);
         }
     },
     computed: {

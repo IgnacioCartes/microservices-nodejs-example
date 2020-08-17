@@ -5,7 +5,7 @@ const CatalogController = {
         try {
 
             // quick validation - numbers only
-            if (!creditCardNumber.match(/^[0-9]+$/) || creditCardNumber.length !== 12)
+            if (!creditCardNumber || !creditCardNumber.match(/^[0-9]+$/) || creditCardNumber.length !== 12)
                 return ctx.body = {
                     status: 'error',
                     message: 'Invalid credit card number'
@@ -26,8 +26,11 @@ const CatalogController = {
                 };
 
             // we could connect with the catalog to check the products are valid here, but lets skip that for now and just return a success
+            console.log('Order:', cart);
+
             return ctx.body = {
-                status: 'success'
+                status: 'success',
+                amount
             };
         } catch (error) {
             console.log(error);
