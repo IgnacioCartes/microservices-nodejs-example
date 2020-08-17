@@ -10,8 +10,11 @@
 </template>
 
 <script>
+import hostsMixin from '../mixins/hostsMixin';
+
 export default {
     name: 'Payment',
+    mixins: [ hostsMixin ],
     data: function() {
         return {
             creditCardNumber: ''
@@ -23,8 +26,13 @@ export default {
     },
     methods: {
         confirmPayment: function(cart, amount, creditCardNumber) {
-            console.log('PAGO', cart, amount, creditCardNumber);
+            const postBody = { cart, amount, creditCardNumber };
 
+            fetch(this.getHost('PAYMENT') + '/payment/', { method: 'POST' })
+                .then(res => res.json())
+                .then(response => {
+                    console.log('paymentResponse', response);
+                });
         }
     }
 }

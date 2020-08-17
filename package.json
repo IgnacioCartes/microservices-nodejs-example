@@ -4,12 +4,13 @@
   "description": "Example on multiple microservices built in node.js",
   "main": "index.js",
   "scripts": {
-    "launch-dev": "concurrently \"cd catalog && nodemon server\" \"cd image-bucket && nodemon server\" \"cd storefront/src && vue serve\""
+    "launch-dev": "concurrently \"cd catalog && nodemon server\" \"cd payment && nodemon server\" \"cd image-bucket && nodemon server\" \"cd storefront/src && vue serve\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^5.2.0",
+    "koa": "^2.13.0",
     "nodemon": "^2.0.4"
   }
 }
